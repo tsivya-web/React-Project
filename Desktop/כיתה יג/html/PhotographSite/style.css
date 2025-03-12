@@ -1,0 +1,331 @@
+.number{
+
+    border-color: black;
+    border-style:solid;
+    text-align: center;
+    background-color: orange;
+    border-radius: 77px 77px 77px 77px;
+    box-shadow: 0px 0px 27px 0px rgba(0,0,0,0.12);
+    padding: 7px 15px 7px 15px;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.1px;
+    word-spacing: 0.1em;
+}
+body{
+    background-color: grey;
+    margin: auto;
+    box-sizing: border-box;
+}
+.title{
+background-color: orange;
+text-align: center;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 25px;
+color: white;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.1px;
+    word-spacing: 0.1em;
+}
+.link{
+    position: relative;
+    background-color: black;
+    color: black;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    position: sticky;
+    top: 5px;
+    z-index: 2;
+}
+.link a{
+    color: orange;
+    padding: 1rem;
+    font-size: 25px;
+   font-family: "Varela Round", Sans-serif;
+}
+.galery{
+    position: relative;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+.link_in_gallery{
+    left: -10px;
+    top: 65px;
+    position: absolute;
+    width: 150px;
+ flex-direction: column; 
+ display: none;
+ box-shadow: 0px 0px 10px rgb(30, 27, 27);
+
+}
+
+.link_in_gallery hr{
+    width: 120px;
+    border-style:dashed;
+    color: white;
+}
+.galery:hover .link_in_gallery {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: black;
+}
+a{
+    text-decoration: none;
+}
+.galery a{
+    padding: 1 rem;
+}
+.link a:hover{
+color: white;
+}
+#title{
+    color:orange;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 38px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.1px;
+    word-spacing: 0.1em;
+    direction: rtl;
+    text-align: center;
+    margin-bottom: 0;
+    position: relative;
+    bottom: -40px;
+}
+#content{
+       margin-bottom: 0; 
+}
+.paragraph p{
+    color: white;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.1px;
+    word-spacing: 0.1em;
+    direction: rtl;
+    text-align: center;
+
+}
+.paragraph{
+    background-color:#06132A;
+    width: 100%;
+    height: 300px;
+}
+.images{
+    background-color: orange;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    height: 300px;
+    padding: 40px;
+}
+.images img{
+    width: 40vh;
+    border-radius: 70% 70% 70% 70%;
+}
+.card a{
+    position: absolute;
+    top: 120px;
+    right: 110px;
+    color: black;
+    font-family: "GveretLevin", Sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.1px;
+    word-spacing: 0.1em;
+    direction: rtl;
+    text-align: center;
+
+}
+.card{
+    position: relative;
+}
+.card:hover  a{
+    display: none;}
+
+    .card_container{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px;
+    }
+    .cardPrice{
+        width:26%;
+        text-align: center;
+        background-color: #06132A;
+       
+    }
+    .cardPrice h3{
+        color: orange;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 39px;
+}
+.cardPrice h4{
+    color:white;
+    font-family: "GveretLevin", Sans-serif;
+    font-size: 37px;
+    font-weight: 600;
+}
+.cardPrice p{
+    color:white;
+    margin-left: 15px;
+    margin-right: 15px;
+    text-align: center;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 23px;
+}
+.cardPrice hr{
+    border-style: dotted;
+    color: white;
+}
+.Contact{
+    background-color: black;
+}
+.Contact p {
+    color: white;
+text-align: center;
+    font-family: "GveretLevin", Sans-serif;
+    font-size: 29px;
+}
+.camera{
+    display: flex;
+    justify-content: space-around;
+    height: 35vh;
+}
+#dream{
+    position: relative;
+    bottom: 80px;
+}
+#dream ::before, #dream ::after {
+   content: '...........................';
+   color: white;
+}
+.icon{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+.icon img{
+    width:10vh;
+}
+.sentence p{
+    width: 60vh;
+}
+.sentence{
+    display: flex;
+}
+.beforecontact{
+    height: 300px;
+}
+@media screen  and (max-width :1224px){
+    .images img{
+        width: 29vh;
+        padding: 0.5rem;
+    }
+    .images{
+        flex-wrap: wrap;    
+    height: 400px;
+    }
+    .card a{
+        right: 50px;
+        top: 100px;
+        transform: translate(-20px, 0px);
+    }
+    .cardPrice{
+        border-style: solid;
+        color:white
+    }
+    .cardPrice h3{    font-size: 30px;}
+    .cardPrice h4{     font-size: 30px;}
+    .cardPrice p{    font-size: 15px;}
+    #dream{font-size: 18px;}
+    .sentence p{
+        font-size: 23px;
+    }
+    .paragraph{
+        height:350px; 
+    }
+}
+@media screen  and (max-width :600px){
+   .images{
+    flex-direction: column;
+    background-color: orange;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 1200px;
+    padding: 40px;
+   } 
+   .images img{
+    width: 40vh;
+    border-radius: 70% 70% 70% 70%;
+   }
+   .card a {
+
+    font-size: 30px;
+    top: 100px;
+    right: 80px;
+    transform: translate(-30px, 30px);
+   }
+   #dream {
+    font-size: 10px;
+}
+   .card_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+   }
+   .cardPrice{
+    width: 100%;
+    direction: rtl;
+    border-style: solid;
+    color: white;
+
+   }
+   .Contact p{
+   color: white;
+    text-align: center;
+    font-family: "GveretLevin", Sans-serif;
+    font-size: 10px;}
+    .paragraph{
+        width: 100%;
+        height: 500px;
+    }
+    
+.icon{
+    align-content: space-around;
+}
+.number{
+    display: none;
+}
+.galery{
+    right: 0px;
+}
+    }
+
+
+

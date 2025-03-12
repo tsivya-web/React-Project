@@ -1,0 +1,59 @@
+body{
+    direction: rtl;
+    background-color: black;
+
+}
+
+a{
+    color:green;
+    font-weight: lighter;
+}
+
+a:hover{
+    font-weight: bolder;
+}
+
+a:active{
+    background-color: orange;
+}
+
+h1{
+    text-align: center;
+    color: orange;
+}
+
+form{
+    padding:2rem;
+    width:500px;
+    margin:auto;
+    background-color: orange;
+    border-radius: 1rem;
+
+    /* פריסה */
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    padding:0.5rem;
+    border-radius: 0.5rem;
+}
+button{
+    margin-top:2rem;
+    margin-right: 10rem;
+    height: 40px;
+    width: 160px;
+    border-radius: 10px;
+}
+
+input:focus{
+    background-color: pink;
+}
+
+input:invalid{
+    border: 2px solid red;
+}
+
+input:required{
+    border-bottom: 3px orange dotted;
+}

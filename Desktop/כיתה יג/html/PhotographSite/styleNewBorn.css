@@ -1,0 +1,203 @@
+.number{
+
+    border-color: black;
+    border-style:solid;
+    text-align: center;
+    background-color: orange;
+    border-radius: 77px 77px 77px 77px;
+    box-shadow: 0px 0px 27px 0px rgba(0,0,0,0.12);
+    padding: 7px 15px 7px 15px;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.1px;
+    word-spacing: 0.1em;
+}
+body{
+    background-color: black;
+    margin: auto;
+    box-sizing: border-box;
+}
+.title{
+background-color: orange;
+text-align: center;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 25px;
+color: white;
+    font-family: "Varela Round", Sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: -0.1px;
+    word-spacing: 0.1em;
+}
+.link{
+    background-color: black;
+    color: black;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    position: sticky;
+    top: 5px;
+    z-index: 2;
+}
+.link a{
+    color: orange;
+    padding: 1rem;
+    font-size: 25px;
+   font-family: "Varela Round", Sans-serif;
+}
+.link_in_gallery hr{
+    width: 120px;
+    border-style:dashed;
+    color: white;
+}
+.galery{
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    
+}
+.galery:hover .link_in_gallery {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: black;
+}
+.link_in_gallery{
+    left: -10px;
+    top: 65px;
+    position: absolute;
+ width: 150px;
+ flex-direction: column; 
+ display: none;
+
+}
+.galery.buttom-galery :hover .link_in_gallery a {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+a{
+    text-decoration: none;
+}
+.galery a{
+    padding: 1 rem;
+}
+.link a:hover{
+color: white;
+}
+.images{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+
+}
+.images img{
+    width: 32vw;
+    margin-top: 0.5rem;
+}
+.img1{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    flex-direction: column;
+    padding:0.25rem;
+
+}
+.img2{
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    flex-direction: column;
+    padding: 0.25rem;
+}
+.img3{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0.25rem;
+}
+.Contact{
+    background-color: black;
+}
+.Contact p {
+    color: white;
+text-align: center;
+    font-family: "GveretLevin", Sans-serif;
+    font-size: 34px;
+}
+.camera{
+    display: flex;
+    justify-content: space-around;
+    height: 35vh;
+}
+#dream{
+    position: relative;
+    bottom: 80px;
+}
+#dream ::before, #dream ::after {
+   content: '...........................';
+   color: white;
+}
+.icon{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+.icon img{
+    width:10vh;
+}
+.sentence p{
+    width: 60vh;
+}
+.sentence{
+    display: flex;
+}
+.beforecontact{
+    height: 300px;
+}
+@media screen  and (max-width :1024px){
+    .images img{
+        width: 72vw;
+        margin-top: 0.7rem;
+    }
+    .Contact p{
+        font-size: 10px;
+    }
+    #dream{font-size: 18px;}
+    .sentence p{
+        font-size: 23px;
+    }
+}
+@media screen  and (max-width :600px){
+    .images img{
+        width: 62vw;
+        margin-top: 0.7rem;
+    }
+    .number{
+        display: none;
+    }
+    #dream{
+        font-size: 14px;
+    }
+    .Contact p{
+        color: white;
+         text-align: center;
+         font-family: "GveretLevin", Sans-serif;
+         font-size: 16px;}
+         icon{
+            align-content: space-around;
+        }
+    
+}
