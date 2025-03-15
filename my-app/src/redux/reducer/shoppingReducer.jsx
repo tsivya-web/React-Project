@@ -1,6 +1,6 @@
 import {produce} from 'immer'
 export const myState={
-   order:[]
+   order:[],
    };
 
 
@@ -12,7 +12,7 @@ export const myState={
         ...state, // עותק חדש של ה-state הקיים
         order: action.payload, // מעדכנים את השדה list
       };
-    break;
+   
    }
 
     default:
