@@ -1,6 +1,6 @@
 import axios from "axios"
 //כתובת של השרת 
-const url="http://localhost:8080/shopping"
+const url="https://client-react-project.onrender.com"
 export const getAllOrder=(id)=>{
 debugger
     return axios.get(`${url}/getById/${id}`)

@@ -1,6 +1,6 @@
 import axios from "axios"
 //כתובת של השרת 
-const url="http://localhost:8080/game"
+const url="https://client-react-project.onrender.com"
 export const getAllGame=()=>{
 debugger
     return axios.get(`${url}/getAll`)
