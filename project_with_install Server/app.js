@@ -20,7 +20,9 @@ app.use(express.static('images'))
 //ייבוא כתובת לפרויקט
 app.listen("8080",()=>{console.log("run barouch hashem")})
 
-
+app.get('/', (req, res) => {
+  res.send('השרת רץ! ברוך השם 🙌');
+});
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ מחובר ל־MongoDB Atlas'))
   .catch((err) => console.error('❌ שגיאת חיבור:', err));
