@@ -2,7 +2,7 @@ import axios from "axios"
 import { useDispatch } from "react-redux"
 import { update_category } from "../redux/actions/listCategoryAction.jsx"
 //כתובת של השרת 
-const url = "https://server-react-project-zobh.onrender.com"
+const url = "https://server-react-project-zobh.onrender.com/category"
 
 export const getAllCategory = () => {
 

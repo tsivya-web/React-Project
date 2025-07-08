@@ -1,6 +1,6 @@
 import axios from "axios"
 //כתובת של השרת 
-const url="https://server-react-project-zobh.onrender.com"
+const url="https://server-react-project-zobh.onrender.com/client"
 export const getAllClient=()=>{
 debugger
     return axios.get(`${url}/getAll`)
