@@ -89,7 +89,7 @@ export const Home = () => {
             {filteredGames.map((x, i) =>
                 <div class="card" onClick={() => mynavigate(`/detailsGame/${x._id}`)} key={i}>
                     <div>
-                        <img src={`http://localhost:8080/${x.img}`} alt="Game 1"></img>
+                        <img src={`https://server-react-project-zobh.onrender.com/images/${x.img}`} alt="Game 1"></img>
                     </div>
                     <h3>{x.name}</h3>
                     <button onClick={(e) => { e.stopPropagation(); d(add_item(x)) }}>Add to Cart</button>
