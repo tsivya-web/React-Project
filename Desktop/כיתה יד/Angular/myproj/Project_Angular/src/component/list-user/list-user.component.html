@@ -1,0 +1,87 @@
+<div class="users-container fade-in">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="users-header">
+      <h1>
+        <i class="fas fa-users"></i>
+        רשימת משתמשים
+      </h1>
+      <p>גלה את הקהילה הקולינרית שלנו</p>
+    </div>
+
+    <!-- Users Grid -->
+    <div class="users-grid">
+      <div class="user-card" *ngFor="let user of getArr(); trackBy: trackByUserId">
+        <div class="user-avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        
+        <div class="user-info">
+          <h3 class="user-name">{{ user.fName }} {{ user.lName }}</h3>
+          <div class="user-details">
+            <div class="detail-item">
+              <i class="fas fa-envelope"></i>
+              <span>{{ user.email }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="fas fa-id-card"></i>
+              <span>מזהה: {{ user.id }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="user-status">
+          <span class="status-badge">
+            <i class="fas fa-check-circle"></i>
+            משתמש פעיל
+          </span>
+        </div>
+        
+        <div class="user-actions">
+          <button class="btn btn-outline-primary btn-sm">
+            <i class="fas fa-eye"></i>
+            צפה בפרופיל
+          </button>
+          <button class="btn btn-outline-secondary btn-sm">
+            <i class="fas fa-envelope"></i>
+            שלח הודעה
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!getArr() || getArr().length === 0">
+      <i class="fas fa-users-slash"></i>
+      <h3>אין משתמשים זמינים</h3>
+      <p>המשתמשים הראשונים יופיעו כאן</p>
+    </div>
+
+    <!-- Statistics -->
+    <div class="statistics-section">
+      <div class="stat-card">
+        <i class="fas fa-users"></i>
+        <div class="stat-content">
+          <span class="stat-number">{{ getArr()?.length || 0 }}</span>
+          <span class="stat-label">משתמשים רשומים</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <i class="fas fa-utensils"></i>
+        <div class="stat-content">
+          <span class="stat-number">0</span>
+          <span class="stat-label">מתכונים משותפים</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <i class="fas fa-star"></i>
+        <div class="stat-content">
+          <span class="stat-number">0</span>
+          <span class="stat-label">דירוג ממוצע</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

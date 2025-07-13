@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <!-- Logo/Brand -->
+    <a class="navbar-brand" routerLink="/home">
+      <i class="fas fa-utensils"></i>
+      <span>מתכונים מקצועיים</span>
+    </a>
+
+    <!-- Mobile toggle button -->
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()">
+      <span class="navbar-toggler-icon">
+        <i class="fas fa-bars"></i>
+      </span>
+    </button>
+
+    <!-- Navigation links -->
+    <div class="navbar-nav" [class.show]="isMenuOpen">
+      <!-- Show these links only when NOT connected -->
+      <a class="nav-link" 
+         *ngIf="!getConnected()"
+         routerLink="/register"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fas fa-user-plus"></i>
+        הירשם
+      </a>
+      
+      <a class="nav-link" 
+         *ngIf="!getConnected()"
+         routerLink="/login"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fas fa-sign-in-alt"></i>
+        התחבר
+      </a>
+      
+      <!-- Show these links only when connected -->
+      <a class="nav-link" 
+         *ngIf="getConnected()" 
+         routerLink="/listUser"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fas fa-users"></i>
+        רשימת משתמשים
+      </a>
+      
+      <a class="nav-link" 
+         *ngIf="getConnected()" 
+         routerLink="/home"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fas fa-book-open"></i>
+        מתכונים
+      </a>
+      
+      <a class="nav-link" 
+         *ngIf="getConnected()"
+         routerLink="/add-recipe"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fas fa-plus-circle"></i>
+        הוספת מתכון
+      </a>
+      
+      <!-- Logout button - only when connected -->
+      <button class="nav-link logout-btn" 
+              *ngIf="getConnected()"
+              (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i>
+        התנתק
+      </button>
+    </div>
+  </div>
+</nav>

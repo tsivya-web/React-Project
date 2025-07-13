@@ -1,0 +1,96 @@
+<div class="details-container fade-in">
+  <div class="container py-5">
+    <!-- Recipe Header -->
+    <div class="recipe-header">
+      <button class="btn btn-outline-light back-btn" routerLink="/home">
+        <i class="fas fa-arrow-right"></i>
+        חזור לרשימה
+      </button>
+    </div>
+
+    <!-- Main Recipe Card -->
+    <div class="recipe-details-card">
+      <div class="recipe-image-section">
+        <img [src]="getImageUrl(recipe.pic)" 
+             [alt]="recipe.name"
+             class="recipe-main-image">
+        <div class="recipe-overlay">
+          <div class="recipe-badge" [class]="getLevelClass(recipe.level)">
+            {{ recipe.level }}
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-content-section">
+        <div class="recipe-header-content">
+          <h1 class="recipe-title">{{ recipe.name }}</h1>
+          <p class="recipe-description">{{ recipe.description }}</p>
+        </div>
+
+        <div class="recipe-meta">
+          <div class="meta-item">
+            <i class="fas fa-clock"></i>
+            <span>זמן הכנה: {{recipe.duration}} דקות</span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-signal"></i>
+            <span>רמת קושי: 
+              <span class="difficulty-badge" [class]="getDifficultyClass(recipe.level)">
+                {{getDifficultyText(recipe.level)}}
+              </span>
+            </span>
+          </div>
+          <div class="meta-item">
+            <i class="fas fa-user"></i>
+            <span>משתמש: {{recipe.name}}</span>
+          </div>
+        </div>
+
+        <div class="recipe-actions">
+          <button class="btn btn-primary save-btn">
+            <i class="fas fa-bookmark"></i>
+            שמור מתכון
+          </button>
+          <button class="btn btn-outline-primary share-btn">
+            <i class="fas fa-share-alt"></i>
+            שתף
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions Section -->
+    <div class="instructions-section" *ngIf="recipe.instructions && arr.length">
+      <div class="section-header">
+        <i class="fas fa-list-ol"></i>
+        <h2>הוראות הכנה</h2>
+      </div>
+      <div class="instructions-content" [innerHTML]="recipe.instructions | instructions:arr"></div>
+    </div>
+
+    <!-- Ingredients Section -->
+    <div class="ingredients-section">
+      <div class="section-header">
+        <i class="fas fa-carrot"></i>
+        <h2>מצרכים</h2>
+      </div>
+      
+      <div class="ingredients-grid">
+        <div class="ingredient-card" *ngFor="let ingredient of arr; trackBy: trackByIngredientId">
+          <div class="ingredient-icon">
+            <i class="fas fa-circle"></i>
+          </div>
+          <div class="ingredient-info">
+            <h3 class="ingredient-name">{{ ingredient.name }}</h3>
+            <div class="ingredient-amount">
+              <span class="amount-label">כמות:</span>
+              <span class="amount-value">{{ ingredientAmounts[ingredient.id] }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

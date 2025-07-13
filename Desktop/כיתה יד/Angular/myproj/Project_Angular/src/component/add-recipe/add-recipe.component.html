@@ -1,0 +1,211 @@
+<div class="add-recipe-container fade-in">
+  <!-- Success Message -->
+  <div class="success-message" *ngIf="showSuccessMessage">
+    <i class="fas fa-check-circle"></i>
+    <span>{{ successMessage }}</span>
+  </div>
+  
+  <div class="container">
+    <div class="add-recipe-header">
+      <h1><i class="fas fa-plus-circle"></i> Add Recipe</h1>
+      <p>Create a new delicious recipe for our community</p>
+    </div>
+
+      <form class="add-recipe-form" (ngSubmit)="addRecipe()">
+        <!-- Basic Recipe Info -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <i class="fas fa-info-circle"></i>
+            פרטי המתכון
+          </h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name" class="form-label">
+                <i class="fas fa-utensils"></i>
+                שם המתכון
+              </label>
+              <input 
+                type="text" 
+                id="name" 
+                class="form-control" 
+                [(ngModel)]="recipe.name" 
+                name="name" 
+                placeholder="למשל: עוגת שוקולד"
+                required>
+            </div>
+            
+            <div class="form-group">
+              <label for="pic" class="form-label">
+                <i class="fas fa-image"></i>
+                קישור לתמונה
+              </label>
+              <input 
+                type="text" 
+                id="pic" 
+                class="form-control" 
+                [(ngModel)]="recipe.pic" 
+                name="pic" 
+                placeholder="למשל: cake.jpg">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description" class="form-label">
+              <i class="fas fa-align-left"></i>
+              תיאור המתכון
+            </label>
+            <textarea 
+              id="description" 
+              class="form-control" 
+              rows="3" 
+              [(ngModel)]="recipe.description" 
+              name="description" 
+              placeholder="תיאור קצר של המתכון..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="level" class="form-label">
+                <i class="fas fa-star"></i>
+                רמת קושי
+              </label>
+              <select 
+                id="level" 
+                class="form-control" 
+                [(ngModel)]="recipe.level" 
+                name="level" 
+                required>
+                <option value="" disabled selected>בחר רמה</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="duration" class="form-label">
+                <i class="fas fa-clock"></i>
+                זמן הכנה
+              </label>
+              <input 
+                type="text" 
+                id="duration" 
+                class="form-control" 
+                [(ngModel)]="recipe.duration" 
+                name="duration" 
+                placeholder="למשל: 45 דקות">
+            </div>
+            
+            <div class="form-group">
+              <label for="amount" class="form-label">
+                <i class="fas fa-users"></i>
+                מספר מנות
+              </label>
+              <input 
+                type="number" 
+                min="1" 
+                id="amount" 
+                class="form-control" 
+                [(ngModel)]="recipe.amount" 
+                name="amount">
+            </div>
+          </div>
+        </div>
+
+        <!-- Ingredients Section -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <i class="fas fa-carrot"></i>
+            מצרכים
+          </h3>
+          
+          <div class="add-ingredient-section">
+            <button 
+              type="button" 
+              class="btn btn-outline-primary add-ingredient-btn" 
+              (click)="changeisChecked()">
+              <i class="fas fa-plus"></i>
+              הוסף מצרך חדש
+            </button>
+            
+            <div class="new-ingredient-input" *ngIf="isChecked">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="הכנס שם מצרך חדש"
+                [(ngModel)]="newIngredient"
+                name="newIngredient"
+                (keyup.enter)="addIngredient(newIngredient)"
+                [disabled]="isLoading">
+              <button 
+                type="button" 
+                class="btn btn-primary" 
+                (click)="addIngredient(newIngredient)"
+                [disabled]="isLoading">
+                <i [class]="isLoading ? 'fas fa-spinner fa-spin' : 'fas fa-plus'"></i>
+                {{ isLoading ? 'מוסיף...' : 'הוסף' }}
+              </button>
+            </div>
+          </div>
+
+          <div class="ingredients-list">
+            <h4 class="ingredients-title">רשימת מצרכים</h4>
+            <div class="ingredient-item" *ngFor="let ing of ingredients">
+              <div class="ingredient-checkbox">
+                <input
+                  type="checkbox"
+                  [checked]="dictionary[ing.id] !== undefined"
+                  (change)="toggleIngredient(ing)"
+                  id="ing-{{ing.id}}">
+                <label for="ing-{{ing.id}}" class="ingredient-label">
+                  {{ ing.name }}
+                </label>
+              </div>
+              
+              <div class="ingredient-amount" *ngIf="dictionary[ing.id] !== undefined">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="ing.amount"
+                  placeholder="כמות"
+                  (change)="updateAmount(ing)">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instructions Section -->
+        <div class="form-section">
+          <h3 class="section-title">
+            <i class="fas fa-list-ol"></i>
+            הוראות הכנה
+          </h3>
+          
+          <div class="form-group">
+            <label for="instructions" class="form-label">
+              <i class="fas fa-edit"></i>
+              שלבי ההכנה
+            </label>
+            <textarea 
+              id="instructions" 
+              class="form-control" 
+              rows="6" 
+              [(ngModel)]="recipe.instructions" 
+              name="instructions" 
+              placeholder="הוסיפו את שלבי ההכנה בפירוט..."></textarea>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary submit-btn">
+            <i class="fas fa-plus-circle"></i>
+            הוסף מתכון
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
