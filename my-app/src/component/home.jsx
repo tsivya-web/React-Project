@@ -16,8 +16,10 @@ export const Home = () => {
   const [found, setFound] = useState(false)
 
     useEffect(() => {
+    console.log("Loading games and categories...")
     getAllGame()
       .then((response) => {
+        console.log("Games loaded:", response.data)
         dispatch(set_listGame(response.data))
       })
       .catch((error) => {
@@ -26,6 +28,7 @@ export const Home = () => {
 
     getAllCategory()
       .then((response) => {
+        console.log("Categories loaded:", response.data)
         dispatch(set_listCategory(response.data))
       })
       .catch((error) => {
@@ -33,9 +36,21 @@ export const Home = () => {
       })
   }, [dispatch])
 
+  console.log("Current listGame:", listGame)
+  console.log("Current selectedCategory:", selectedCategory)
+  
   const filteredGames = selectedCategory
     ? listGame.filter(game => game.code_category === selectedCategory)
     : listGame
+    
+  console.log("Filtered games:", filteredGames)
+  
+  // בדיקת כמות במלאי
+  if (listGame && listGame.length > 0) {
+    listGame.forEach(game => {
+      console.log(`Game: ${game.name}, Amount: ${game.amount}, Type: ${typeof game.amount}`)
+    })
+  }
 
   const mynavigate = (path) => {
     navigate(path)
@@ -147,6 +162,7 @@ export const Home = () => {
                         <div className="game-card-info">
                           <span className="game-card-price">₪{game.price}</span>
                           <span className="game-card-age">גיל מינימלי: {game.age}+</span>
+                          <span className="game-card-stock">מלאי: {parseInt(game.amount) || 0}</span>
                         </div>
                         <div className="game-card-actions">
                           <button
@@ -155,9 +171,10 @@ export const Home = () => {
                               e.stopPropagation()
                               addToBasket(game)
                             }}
+                            disabled={parseInt(game.amount) <= 0}
                           >
                             <i className="fas fa-shopping-cart me-1"></i>
-                            הוסף לסל
+                            {parseInt(game.amount) > 0 ? 'הוסף לסל' : 'אזל המלאי'}
                           </button>
                           <button
                             className="btn btn-outline-primary btn-sm"

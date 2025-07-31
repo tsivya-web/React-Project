@@ -6,41 +6,49 @@ import { getAllGame,updateGame,dellGame } from "../axios/gameAxios.jsx"
 export const ListGame = () => {
     const d = useDispatch()
     let mylist = useSelector(s => s.dataGameReducer.list)
+    let isManager = useSelector(x => x.dataClientReducer.isManager)
+    
     useEffect(() => {
-        debugger
-       if(mylist.length==0){
+        if (isManager && mylist.length==0){
             getAllGame().then((x) =>
                 d(set_listGame(x.data))
-
             )
-                .catch((err) => console.log(err));
+            .catch((err) => console.log(err));
         }
-    }, [])
-
-
-    let isManager = useSelector(x => x.dataClientReducer.isManager)
+    }, [isManager, mylist.length, d])
     const [isedit, setidedit] = useState(false)
     const [keyedit, setkeyedit] = useState()
     const [saveedit, setsaveedit] = useState(false)
     const [item, setitem] = useState({})
     const saveitem = (x) => {
-        debugger
       setitem({_id:x._id,  name: x.name,code_category: x.code_category, price: x.price, age: x.age,img:x.img,amount:x.amount,detailsGame:x.detailsGame  })
     }
 
     const save = () => {
-        debugger
         setsaveedit(false)
-       let data=updateGame(item)
+        let data=updateGame(item)
         d(update_game(item))
-
         setidedit(false)
     }
-    return <>
-        <p>{isManager ? "Yes, this is a manager." : "No, this is not a manager."}</p>
+    
+    // בדיקה אם המשתמש הוא מנהל
+    if (!isManager) {
+        return (
+            <div className="access-denied">
+                <div className="access-denied-icon">
+                    <i className="fas fa-lock"></i>
+                </div>
+                <h3>גישה מוגבלת</h3>
+                <p>רק מנהלים יכולים לגשת לדף זה</p>
+            </div>
+        )
+    }
+    
+    return (
+        <>
+            <p>{isManager ? "Yes, this is a manager." : "No, this is not a manager."}</p>
 
-
-        <table className="table"  style={{maxHeight:"600px",  overflowY: "auto"}}>
+            <table className="table"  style={{maxHeight:"600px",  overflowY: "auto"}}>
             <thead>
                 <tr>
                     <th>name</th>
@@ -79,5 +87,5 @@ export const ListGame = () => {
         </table>
 
     </>
-
+    )
 }

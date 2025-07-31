@@ -1,19 +1,33 @@
 import { useState } from "react"
 import { addCategory } from "../axios/categoryAxios"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { add_category } from "../redux/actions/listCategoryAction"
 import { useNavigate } from "react-router-dom"
 
 export const AddCategory = () => {
     let d=useDispatch()
+    let isManager = useSelector(x => x.dataClientReducer.isManager)
     const [myexcep, setmyexecp] = useState({name:true})
-let navigate=useNavigate()
+    let navigate=useNavigate()
     const [obj, setobj] = useState({})
     const add=()=>{
       addCategory(obj).then((x)=>
                d(add_category(x))
         ).catch((e)=>console.log(e))
      navigate('/mylistCategory')
+    }
+    
+    // בדיקה אם המשתמש הוא מנהל
+    if (!isManager) {
+        return (
+            <div className="access-denied">
+                <div className="access-denied-icon">
+                    <i className="fas fa-lock"></i>
+                </div>
+                <h3>גישה מוגבלת</h3>
+                <p>רק מנהלים יכולים לגשת לדף זה</p>
+            </div>
+        )
     }
 
     // const func = (e) => {

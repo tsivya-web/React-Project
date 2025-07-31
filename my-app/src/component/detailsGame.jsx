@@ -33,6 +33,7 @@ export const DetailsGame = () => {
   useEffect(() => {
     if (listGame && listGame.length > 0) {
       const foundGame = listGame.find(g => g._id === code)
+      console.log("Found game:", foundGame)
       if (foundGame) {
         setGame(foundGame)
         // מצא את הקטגוריה
@@ -64,12 +65,14 @@ export const DetailsGame = () => {
       </div>
     )
   }
+  
+  console.log("Game details - Amount:", game.amount, "Type:", typeof game.amount, "Is > 0:", game.amount > 0)
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-12">
-          <div className="card">
+          <div className="card" style={{width: "100%"}}>
             <div className="card-header">
               <div className="d-flex justify-content-between align-items-center">
                 <h2 className="mb-0">פרטי המשחק</h2>
@@ -80,7 +83,7 @@ export const DetailsGame = () => {
             </div>
             <div className="card-body">
               <div className="row">
-                <div className="col-lg-6 col-md-12 mb-4">
+                <div className="col-lg-4 col-md-12 mb-4">
                   <div className="game-image-container">
                     <img 
                       src={`https://server-react-project-zobh.onrender.com/images/${game.img}`} 
@@ -89,7 +92,7 @@ export const DetailsGame = () => {
                     />
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-12">
+                <div className="col-lg-8 col-md-12">
                   <div className="game-details">
                     <h1 className="game-title">{game.name}</h1>
                     <div className="game-category">
@@ -107,7 +110,7 @@ export const DetailsGame = () => {
                       </div>
                       <div className="info-item">
                         <strong>כמות במלאי:</strong>
-                        <span className="stock-badge">{game.quantity}</span>
+                        <span className="stock-badge">{parseInt(game.amount) || 0}</span>
                       </div>
                     </div>
                     <div className="game-description">
@@ -117,10 +120,10 @@ export const DetailsGame = () => {
                     <div className="game-actions">
                       <button 
                         className="btn btn-primary btn-lg me-3"
-                        onClick={add_item}
-                        disabled={game.quantity <= 0}
+                        onClick={addToBasket}
+                        disabled={parseInt(game.amount) <= 0}
                       >
-                        {game.quantity > 0 ? 'הוסף לסל' : 'אזל המלאי'}
+                        {parseInt(game.amount) > 0 ? 'הוסף לסל' : 'אזל המלאי'}
                       </button>
                       <button 
                         className="btn btn-outline-primary btn-lg"

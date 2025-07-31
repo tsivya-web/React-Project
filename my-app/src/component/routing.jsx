@@ -30,6 +30,7 @@ export const Routing = () => {
         <Route path="areaPersonal" element={<AreaPersonal></AreaPersonal>} >  </Route>
         <Route path="detailsOrder/:id" element={<DetailsOrder></DetailsOrder>} >  </Route>
         <Route path="/" element={<Login></Login>} >  </Route>
+        <Route path="*" element={<Login></Login>} >  </Route>
 
     </Routes>
 }

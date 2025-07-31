@@ -69,10 +69,11 @@ export const Login = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row justify-content-center">
-        <div className="col-lg-6 col-md-8 col-sm-12">
-          <div className="card login-card">
+        <div className="col-12">
+          <div className="card login-card"
+        >
             <div className="card-header">
               <div className="text-center">
                 <h2 className="mb-0">🎮 התחברות</h2>
@@ -80,7 +81,7 @@ export const Login = () => {
               </div>
             </div>
             <div className="card-body">
-              <div className="login-form">
+              <div className="login-form"    style={{width: "80%"}}>
                 <div className="form-group mb-4">
                   <label htmlFor="name" className="form-label">
                     <i className="fas fa-user me-2"></i>

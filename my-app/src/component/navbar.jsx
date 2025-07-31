@@ -28,15 +28,15 @@ export const Navbar = () => {
           <button className="nav-link btn btn-link" onClick={handleLogout}>  התנתקות    </button>
         </li>
       )}
-      <li className="nav-item">
+      {isManager && <li className="nav-item">
         <Link className="nav-link" to={'mylistCategory'}>רשימת קטגוריות  </Link>
-      </li>
+      </li>}
       {isManager && <li className="nav-item">
         <Link className="nav-link" to={'myaddCategory'}>הוספת קטגוריה </Link>
       </li>}
-      <li className="nav-item">
+      {isManager && <li className="nav-item">
         <Link className="nav-link" to={'myListGame'}> רשימת משחקים    </Link>
-      </li>
+      </li>}
       {isManager && <li className="nav-item">
         <Link className="nav-link" to={'addGame'}>   הוספת משחק    </Link>
       </li>}

@@ -1,13 +1,14 @@
 import { useState } from "react"
 import { addGame } from "../axios/gameAxios"
 import { add_game } from "../redux/actions/listGameAction"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 
 export const AddGame = () => {
     let d = useDispatch()
     let navigate = useNavigate()
+    let isManager = useSelector(x => x.dataClientReducer.isManager)
     const [obj, setobj] = useState({})
     const add = () => {
         addGame(obj).then((x) =>
@@ -15,7 +16,19 @@ export const AddGame = () => {
         ).catch((e) => console.log(e))
         navigate('/myListGame')
     }
-
+    
+    // בדיקה אם המשתמש הוא מנהל
+    if (!isManager) {
+        return (
+            <div className="access-denied">
+                <div className="access-denied-icon">
+                    <i className="fas fa-lock"></i>
+                </div>
+                <h3>גישה מוגבלת</h3>
+                <p>רק מנהלים יכולים לגשת לדף זה</p>
+            </div>
+        )
+    }
 
     return (
         <div className="container my-5">

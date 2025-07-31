@@ -9,7 +9,6 @@ import { idClient } from "../axios/clientAxios"
 import { add } from "../axios/shoppingAxios"
 export const BasketShopping = () => {
     const navigate=useNavigate();
-    debugger
 // const [total, settotal] = useState({})
     let user = useSelector(x => x.dataClientReducer.currentClient)
     const basket = useSelector(x => x.dateBasketReducer.basket)
@@ -29,7 +28,6 @@ export const BasketShopping = () => {
         return totalPrice
     }
     const addOrder = async () => {
-        debugger
         
         // בדיקה טובה יותר אם המשתמש מחובר
         if (!user || !user.name || user.name === "" || !user.password || user.password === "") {
@@ -38,7 +36,7 @@ export const BasketShopping = () => {
             return
         }
         
-        debugger
+
     
         let id = "";
         try {
@@ -83,28 +81,96 @@ export const BasketShopping = () => {
     
     return (
         <div className="shopping-cart">
-            <h2>סל קניות</h2>
-            {basket.map((x, i) => (
-                <div key={i} className="cart-item">
-                    <img src={`../images/${x.img}`} alt="Game 1" className="cart-item-image" />
-                    <div className="cart-item-details">
-                        <h3 className="cart-item-title">{x.name}</h3>
-                        <p className="cart-item-price">מחיר: {x.price} שקל</p>
-                        <div className="cart-item-quantity-wrapper">
-                            <button onClick={() => d(less_amount(x._id))}>-</button>
-                            <span>{x.amount}</span>
-                            <button onClick={() => d(add_amount(x._id))}>+</button>
-                        </div>
-                        <div className="cart-item-total">מחיר סופי : {x.price * x.amount} שקל</div>
-                        <button className="remove-item" onClick={() => d(dellItem(x._id))}>מחק</button>
-                    </div>
-                </div>
-            ))}
-            <div className="cart-summary">
-                <h3>סיכום הזמנה</h3>
-                <p>סה"כ לתשלום: {totalPrice()} שקל</p>
-                <button className="checkout-button" onClick={(e) => { addOrder() }}>Proceed to Checkout</button>
+            <div className="cart-header">
+                <h2>🛒 סל קניות</h2>
+                <p className="cart-subtitle">סך הכל {func()} פריטים בסל</p>
             </div>
+            
+            {basket.length === 0 ? (
+                <div className="empty-cart">
+                    <div className="empty-cart-icon">
+                        <i className="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>הסל שלך ריק</h3>
+                    <p>הוסף משחקים לסל כדי להתחיל</p>
+                    <button className="btn btn-primary" onClick={() => navigate('/home')}>
+                        <i className="fas fa-gamepad me-2"></i>
+                        עבור לחנות
+                    </button>
+                </div>
+            ) : (
+                <>
+                    <div className="cart-items">
+                        {basket.map((x, i) => (
+                            <div key={i} className="cart-item">
+                                <div className="cart-item-image-container">
+                                    <img 
+                                        src={`https://server-react-project-zobh.onrender.com/images/${x.img}`} 
+                                        alt={x.name} 
+                                        className="cart-item-image" 
+                                    />
+                                </div>
+                                <div className="cart-item-details">
+                                    <h3 className="cart-item-title">{x.name}</h3>
+                                    <div className="cart-item-price">₪{x.price}</div>
+                                </div>
+                                <div className="cart-item-quantity-section">
+                                    <div className="quantity-controls">
+                                        <button 
+                                            className="quantity-btn quantity-btn-minus"
+                                            onClick={() => d(less_amount(x._id))}
+                                            disabled={x.amount <= 1}
+                                        >
+                                            <i className="fas fa-minus"></i>
+                                        </button>
+                                        <span className="quantity-display">{x.amount}</span>
+                                        <button 
+                                            className="quantity-btn quantity-btn-plus"
+                                            onClick={() => d(add_amount(x._id))}
+                                        >
+                                            <i className="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div className="cart-item-total">₪{x.price * x.amount}</div>
+                                </div>
+                                <div className="cart-item-actions">
+                                    <button 
+                                        className="remove-item-btn" 
+                                        onClick={() => d(dellItem(x._id))}
+                                        title="הסר מהסל"
+                                    >
+                                        <i className="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    <div className="cart-summary">
+                        <div className="summary-header">
+                            <h3>📋 סיכום הזמנה</h3>
+                        </div>
+                        <div className="summary-details">
+                            <div className="summary-row">
+                                <span>סך הכל פריטים:</span>
+                                <span>{func()}</span>
+                            </div>
+                            <div className="summary-row total-row">
+                                <span>סך הכל לתשלום:</span>
+                                <span className="total-price">₪{totalPrice()}</span>
+                            </div>
+                        </div>
+                        <button 
+                            className="checkout-button" 
+                            onClick={addOrder}
+                            disabled={!user || !user.name}
+                        >
+                            <i className="fas fa-credit-card me-2"></i>
+                            {user && user.name ? 'המשך לתשלום' : 'התחבר כדי להמשיך'}
+                        </button>
+                    </div>
+                </>
+            )}
         </div>
     )
 }

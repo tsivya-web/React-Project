@@ -6,20 +6,17 @@ import { updateCategory } from "../axios/categoryAxios.jsx"
 export const ListCategory = () => {
     const d = useDispatch()
     let mylist = useSelector(s => s.dataCategoryReducer.list)
+    let isManager = useSelector(x => x.dataClientReducer.isManager)
+    
     useEffect(() => {
-       
+        if (isManager) {
             getAllCategory().then((x) =>{
                 console.log(x.data);
-
                 d(set_listCategory(x.data))}
-
             )
-                .catch((err) => console.log(err));
-        
-    }, [])
-
-
-    let isManager = useSelector(x => x.dataClientReducer.isManager)
+            .catch((err) => console.log(err));
+        }
+    }, [isManager, d])
     const [isedit, setidedit] = useState(false)
     const [keyedit, setkeyedit] = useState()
     const [saveedit, setsaveedit] = useState(false)
@@ -35,10 +32,22 @@ export const ListCategory = () => {
         d(update_category(item));
         setidedit(false)
     }
-    // alert(isManager)
- const delLine=(id)=>{ 
-   d(dell_category(id,dellCategory(id)))
- }
+    const delLine=(id)=>{ 
+        d(dell_category(id,dellCategory(id)))
+    }
+    
+    // בדיקה אם המשתמש הוא מנהל
+    if (!isManager) {
+        return (
+            <div className="access-denied">
+                <div className="access-denied-icon">
+                    <i className="fas fa-lock"></i>
+                </div>
+                <h3>גישה מוגבלת</h3>
+                <p>רק מנהלים יכולים לגשת לדף זה</p>
+            </div>
+        )
+    }
 
     return <> <table className="table">
             <thead>

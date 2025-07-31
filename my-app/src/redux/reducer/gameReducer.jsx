@@ -23,13 +23,12 @@ export const myState={
    export const dataGameReducer=produce((state,action)=>{
     switch(action.type){
    
-            case "SET_LISTGAME":{
-                debugger; 
-                 state.list=action.payload
+                        case "SET_LISTGAME":{
+                console.log("Setting games list:", action.payload)
+                state.list=action.payload
                 break;}
 
                 case "UPDATE_GAME": {
-                    debugger
                     // const index=state.list.findIndex(u=>u._id==action.payload._id)
                     // state.list[index]==action.payload
                     const index = state.list.findIndex((u) => u._id === action.payload._id);
@@ -46,7 +45,6 @@ export const myState={
                   }
                
                   case "DELL_GAME": {
-                    debugger
                     if (action.payload.status1) {
                       return {
                         ...state,
@@ -58,7 +56,6 @@ export const myState={
                     return state;
                   }
                   case "ADD_GAME": {
-                    debugger
                       state.list.push(action.payload)
                      break;
                   }

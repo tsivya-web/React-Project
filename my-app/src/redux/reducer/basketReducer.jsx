@@ -10,7 +10,6 @@ export const myState = {
 export const dateBasketReducer = produce((state, action) => {
   switch (action.type) {
     case "ADD_ITEM": {
-      debugger;
       if (state.basket.some(x => x._id == action.payload._id)) {
         const index = state.basket.findIndex(x => x._id == action.payload._id)
         state.basket[index].amount =  state.basket[index].amount+1

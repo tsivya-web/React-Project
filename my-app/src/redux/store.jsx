@@ -6,7 +6,6 @@ import { dataClientReducer } from "./reducer/clientReducer";
 import {dateBasketReducer} from "./reducer/basketReducer"
 import { dataShoppingReducer } from "./reducer/shoppingReducer";
 const reduce=combineReducers({ dataShoppingReducer,  dateBasketReducer, dataCategoryReducer,dataGameReducer,dataClientReducer})
-debugger
 
 
 
