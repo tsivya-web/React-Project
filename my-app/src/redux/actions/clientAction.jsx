@@ -22,4 +22,8 @@ export const add_client=(item)=>{
     
 }
 
+export const logout=()=>{
+    return {type:"LOGOUT"}
+}
+
 

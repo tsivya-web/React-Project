@@ -1,67 +1,92 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { getAllGame } from "../axios/gameAxios";
+import { set_listGame } from "../redux/actions/listGameAction.jsx";
 
 export const DetailsOrder = () => {
   let list = useSelector(x => x.dataShoppingReducer.order)
   let game = useSelector(x => x.dataGameReducer.list)
+  const dispatch = useDispatch();
   const a = useParams();
 
-    const index = list.findIndex((u) => u._id == a.id);
-      const selectedOrder = list[index];
-  const date=   selectedOrder.date;
-     const total=selectedOrder.totalPrice;
-     const obj=selectedOrder.arrShopping;
+  const index = list.findIndex((u) => u._id == a.id);
+  const selectedOrder = list[index];
+  
+  useEffect(() => {
+    // אם המשחקים לא נטענו, נטען אותם
+    if (!game || game.length === 0) {
+      getAllGame()
+        .then((response) => {
+          dispatch(set_listGame(response.data))
+        })
+        .catch((error) => {
+          console.error("Error loading games:", error)
+        })
+    }
+  }, [game, dispatch])
+  
+  if (!selectedOrder) {
+    return <div>הזמנה לא נמצאה</div>
+  }
 
   const getItemDetails = (id) => {
-    debugger
-    return game.find((u) => u._id == id) ;
+    return game.find((u) => u._id == id);
   };
-  return <><div class="order-details">
-     <div class="card shadow"  style={{width:"100%"}}>
-       <div class="card-header text-center">
-         <h2>פרטי הזמנה</h2>
-       </div>
-       <div class="card-body">
-         <div class="mb-3">
-           <h5><strong>תאריך :</strong> {new Date(date).toLocaleString('he-IL', { day: '2-digit', month: '2-digit', year:'2-digit' })}</h5>
-           <h5><strong> שעה:</strong> {new Date(date).toLocaleString('he-IL', { hour:'2-digit',minute:'2-digit' })}</h5>
-           <h5><strong>מספר הזמנה:</strong> #12345</h5>
-         </div>
-        <div class="table-responsive"> */
-  <table class="table table-bordered table-striped">
-    <thead class="table-primary">
-      <tr>
-        <th>תמונה</th>
-        <th>שם מוצר</th>
-        <th>כמות</th>
-        <th>מחיר ליחידה (₪)</th>
-        <th>מחיר סופי (₪)</th>
-      </tr>
-    </thead>
- <tbody>
-      {obj.map((x, i) => {    const item= getItemDetails(x.id_game)
-      return(<tr  key={i}>
 
-        <td>
-          <img src={`http://localhost:8080/${item.img}`} alt="Product 1" class="product-img"></img> </td>
-        <td> {item.name}</td>
-        <td> {x.amount}</td>
-        <td>{x.price}</td>
-        <td>{x.price * x.amount}</td>
-      </tr>)})}
-    </tbody>
-  </table>
-  </div>
-   <div class="text-end mt-4">
-<h4><strong>סכום כולל:</strong>  {total} ₪</h4>
-</div>
-</div>
-<div class="card-footer text-center bg-light">
-<p>תודה רבה על הרכישה!</p>
-</div>
-</div>
-</div>
-  </>
-    }
+  return (
+    <div className="order-details">
+      <div className="card shadow" style={{width:"100%"}}>
+        <div className="card-header text-center">
+          <h3>פרטי הזמנה</h3>
+        </div>
+        <div className="card-body">
+          <div className="mb-3">
+            <strong>מספר הזמנה:</strong> {selectedOrder._id}
+          </div>
+          <div className="table-responsive">
+            <table className="table table-bordered table-striped">
+              <thead className="table-primary">
+                <tr>
+                  <th>שם המשחק</th>
+                  <th>מחיר</th>
+                  <th>כמות</th>
+                  <th>תמונה</th>
+                </tr>
+              </thead>
+              <tbody>
+                {selectedOrder.arrShopping && selectedOrder.arrShopping.map((item, index) => {
+                  const gameDetails = getItemDetails(item.id_game);
+                  return (
+                    <tr key={index}>
+                      <td>{gameDetails ? gameDetails.name : 'לא נמצא'}</td>
+                      <td>{item.price} שקל</td>
+                      <td>{item.amount}</td>
+                      <td>
+                        {gameDetails && gameDetails.img && (
+                          <img 
+                            src={`https://server-react-project-zobh.onrender.com/images/${gameDetails.img}`} 
+                            alt={gameDetails.name} 
+                            className="product-img" 
+                            style={{width: '50px', height: '50px', objectFit: 'cover'}}
+                          />
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div className="text-end mt-4">
+            <h4>סה"כ לתשלום: {selectedOrder.totalPrice} שקל</h4>
+          </div>
+        </div>
+        <div className="card-footer text-center bg-light">
+          <p>תאריך הזמנה: {new Date(selectedOrder.date).toLocaleDateString('he-IL')}</p>
+        </div>
+      </div>
+    </div>
+  )
+}
   

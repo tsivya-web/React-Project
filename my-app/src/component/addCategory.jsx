@@ -30,36 +30,28 @@ let navigate=useNavigate()
 
            
     // }
-    return <>
-
-<div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow">
-                    <div class="card-header bg-primary text-white text-center">
-                        <h3>טופס הוספת משחק</h3>
-                    </div>
-                    <div class="card-body">
-
-                        
-                            <div class="mb-3">
-                                <label class="form-label">שם קטגוריה</label>
-                                <input type="text" placeholder="Enter name category " onBlur={(e) => setobj({ ...obj, name: e.target.value })} />
-                            </div>
-                          
-                            <div class="d-grid">
-                                <button onClick={() =>add()}  class="btn btn-success">הוסף משחק</button>
-                            </div>
-
-                    </div>
-                </div>
+    return (
+    <div className="container my-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card shadow">
+            <div className="card-header bg-primary text-white text-center">
+              <h3>הוספת קטגוריה חדשה</h3>
             </div>
+            <div className="card-body">
+              <form>
+                <div className="mb-3">
+                  <label className="form-label">שם קטגוריה</label>
+                  <input className="form-control" type="text" placeholder="הכנס שם קטגוריה" onBlur={(e) => setobj({ ...obj, name: e.target.value })} />
+                </div>
+                <div className="d-grid">
+                  <button onClick={() => add()} className="btn btn-success">הוסף קטגוריה</button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-        {/* <div className="mb-3">
-            <input type="text" placeholder="Enter name category " onBlur={(e) => setobj({ ...obj, name: e.target.value })} />
-        </div>
-
-        <button onClick={() =>add()} type="submit" className="btn btn-primary" >הוסף</button> */}
-    </>
+  )
 }
